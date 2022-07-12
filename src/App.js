@@ -1,7 +1,7 @@
 function App() {
   return (
     <div>
-      nunito app name lama dev //
+      nunito app name lama dev 
     </div>
   );
 }
