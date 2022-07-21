@@ -5,6 +5,7 @@ import List from "./pages/list/List";
 import Login from "./pages/login/Login";
 import New from "./pages/new/New";
 import Single from "./pages/single/Single";
+import './style/dark.scss';
 function App() {
   return (
     <BrowserRouter>
