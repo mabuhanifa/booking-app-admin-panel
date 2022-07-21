@@ -25,7 +25,7 @@
         background: transparent;
 
         &::placeholder {
-          font-size: 0.75rem;
+          font-size: 12px;
         }
       }
     }
@@ -48,7 +48,6 @@
           width: 30px;
           height: 30px;
           border-radius: 50%;
-          object-fit: cover;
         }
 
         .counter {

@@ -1,5 +1,5 @@
 import {
-    Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis
+  Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis
 } from "recharts";
 import './chart.scss';
   
