@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { DarkModeContext } from "./context/darkModeContext";
 import { userInputs } from "./formSource";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
@@ -8,8 +10,9 @@ import Single from "./pages/single/Single";
 import "./style/dark.scss";
 
 function App() {
+  const { darkMode } = useContext(DarkModeContext);
   return (
-    <div className="app dark">
+    <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
