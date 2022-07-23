@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
 import { DarkModeContext } from "./context/darkModeContext";
 import { userInputs } from "./formSource";
 import Home from "./pages/home/Home";
@@ -11,22 +12,81 @@ import "./style/dark.scss";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const ProtectedRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+
+    if (!user) {
+      return <Navigate to="/login" />;
+    }
+
+    return children;
+  };
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
+          <Route path="login" element={<Login />} />
           <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route path="new" element={<New inputs={userInputs} />} />
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":userId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <New inputs={userInputs} />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
             <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route path="new" element={<New inputs={userInputs} />} />
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <List />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":productId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>
+                    <New inputs={userInputs} />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
           </Route>
         </Routes>
