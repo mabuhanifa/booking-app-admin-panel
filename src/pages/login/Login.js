@@ -24,11 +24,14 @@ const Login = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
-        credentials
+        credentials,
+        {
+          withCredentials: true,
+        }
       );
       if (res.data.isAdmin) {
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-        console.log(res.data);
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+        console.log(res.data.details);
 
         navigate("/");
       } else {
