@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { DarkModeContext } from "./context/darkModeContext";
+import { hotelColumns, userColumns } from "./datatablesource";
 import { userInputs } from "./formSource";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
@@ -37,11 +38,11 @@ function App() {
             />
 
             <Route path="users">
-              <Route
+            <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={userColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -62,12 +63,12 @@ function App() {
                 }
               />
             </Route>
-            <Route path="products">
+            <Route path="hotels">
               <Route
                 index
                 element={
                   <ProtectedRoute>
-                    <List />
+                    <List columns={hotelColumns} />
                   </ProtectedRoute>
                 }
               />

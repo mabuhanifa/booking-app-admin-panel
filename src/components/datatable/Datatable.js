@@ -2,11 +2,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { userColumns } from "../../datatablesource";
 import useFetch from "../../hooks/useFetch";
 import "./datatable.scss";
 
-const Datatable = () => {
+const Datatable = ({columns}) => {
   const location = useLocation();
   
   const path = location.pathname.split("/")[1];
@@ -14,7 +13,7 @@ const Datatable = () => {
   const url = `http://localhost:5000/api/${path}`;
   
   const [list, setList] = useState();
-
+console.log(list)
   const { data, loading, error } = useFetch(url, {
     withCredentials: true,
   });
@@ -61,15 +60,15 @@ const Datatable = () => {
           Add New
         </Link>
       </div>
-      <DataGrid
+      {list? <DataGrid
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
+        rows={list}
+        columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
         getRowId={(row) => row._id}
-      />
+      /> : <p>loading...</p>}
     </div>
   );
 };
